@@ -8,6 +8,7 @@ describe('Build fixture', () => {
   beforeAll(async () => {
     const config = require('./nuxt.config')
     nuxt = new Nuxt(config)
+    await nuxt.ready()
 
     buildDone = jest.fn()
 
