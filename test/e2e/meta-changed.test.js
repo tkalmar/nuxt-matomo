@@ -18,6 +18,8 @@ describe('matomo analytics', () => {
     const config = require('../fixtures/meta-changed/nuxt.config')
     nuxt = new Nuxt(config)
 
+    await nuxt.ready()
+
     port = await getPort()
     await nuxt.server.listen(port, 'localhost')
     await browser.start({})
@@ -113,7 +115,7 @@ describe('matomo analytics', () => {
   test('warns on meta changed timeout (in debug, the test)', async () => {
     const pageUrl = '/noupdate2'
     await page.nuxt.navigate(pageUrl)
-    await waitUntil(() => matomoUrl.length >= 1, 2000)
+    await waitUntil(() => matomoUrl.length >= 1)
     expect(matomoUrl.length).toBe(0)
 
     expect(console.debug).not.toHaveBeenCalledWith(expect.stringMatching(createTrackerMsg))

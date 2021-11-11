@@ -17,6 +17,7 @@ describe('matomo analytics', () => {
   beforeAll(async () => {
     const config = require('../fixtures/basic/nuxt.config')
     nuxt = new Nuxt(config)
+    await nuxt.ready()
 
     port = await getPort()
     await nuxt.server.listen(port, 'localhost')
